@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Swara 🧸</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fff0f5; /* Soft Lavender Blush/Pink */
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .game-wrapper {
+            text-align: center;
+            position: relative;
+        }
+
+        .teddy-container {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            z-index: 5;
+        }
+
+        #teddy {
+            font-size: 120px;
+            display: inline-block;
+            transition: transform 0.2s;
+            user-select: none;
+        }
+
+        /* The white heart popping from the center */
+        .heart-pop {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            color: white;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 10;
+        }
+
+        .animate-heart {
+            animation: burst 2s ease-out forwards;
+        }
+
+        @keyframes burst {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(-50%, -250%) scale(8); opacity: 0; }
+        }
+
+        .squeeze {
+            transform: scale(0.8) !important;
+        }
+
+        #message-box {
+            margin-top: 30px;
+            opacity: 0;
+            transition: opacity 1.5s ease-in;
+            max-width: 300px;
+        }
+
+        h1 {
+            color: #db7093;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #a64d79;
+            font-size: 16px;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .instruction {
+            color: #ffb6c1;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-wrapper">
+        <div class="instruction" id="hint">Tap the teddy to unlock</div>
+        
+        <div class="teddy-container" onclick="popHeart()">
+            <div id="teddy">🧸</div>
+            <div id="heart" class="heart-pop">🤍</div>
+        </div>
+
+        <div id="message-box">
+            <h1>Happy Teddy Day Swara 🤍🧸</h1>
+            <p>
+                I wish I could give you a teddy like before,<br>
+                but now I just hold onto memories…<br>
+                because you’re no longer in my arms,<br>
+                only in my heart.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function popHeart() {
+            const teddy = document.getElementById('teddy');
+            const heart = document.getElementById('heart');
+            const message = document.getElementById('message-box');
+            const hint = document.getElementById('hint');
+
+            // Visual "click" effect on teddy
+            teddy.classList.add('squeeze');
+            setTimeout(() => teddy.classList.remove('squeeze'), 200);
+
+            // Trigger the heart animation from the center
+            heart.classList.remove('animate-heart');
+            void heart.offsetWidth; // Reset animation
+            heart.classList.add('animate-heart');
+
+            // Reveal the message
+            message.style.opacity = '1';
+            hint.style.opacity = '0';
+        }
+    </script>
+</body>
+</html>
+
